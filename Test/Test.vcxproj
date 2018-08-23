@@ -121,6 +121,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FSM.h" />
+    <ClInclude Include="Idle.h" />
+    <ClInclude Include="InID.h" />
+    <ClInclude Include="InPassword.h" />
+    <ClInclude Include="Open.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

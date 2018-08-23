@@ -7,6 +7,7 @@ struct State {
 	const char* name;
 	event(*loop)(State* thi, void* uData);
 	Transition* transitions;
+	void* stateData;
 };
 struct Transition {
 	event ev;
@@ -16,9 +17,10 @@ struct Transition {
 
 State* mainLoop(event ev, State* curr, void* uData)
 {
+	int i = 0;
 	if (ev == NO_EVENT)
 		return curr;
-	for (int i = 0; curr->transitions[i].ev != END_OF_TABLE; i++)
+	for (; curr->transitions[i].ev != END_OF_TABLE; i++)
 		if (curr->transitions[i].ev != END_OF_TABLE && ev == curr->transitions[i].ev)
 		{
 			if (curr->transitions[i].tranFunc != NULL)
