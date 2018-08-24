@@ -18,21 +18,30 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="InID.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InPassword.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Idle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Open.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FSM.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Idle.h">
+    <ClInclude Include="AppData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="InID.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InPassword.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Open.h">
+    <ClInclude Include="States.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

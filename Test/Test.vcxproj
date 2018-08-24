@@ -117,14 +117,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FSM.cpp" />
+    <ClCompile Include="Idle.cpp" />
+    <ClCompile Include="InID.cpp" />
+    <ClCompile Include="InPassword.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Open.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FSM.h" />
-    <ClInclude Include="Idle.h" />
-    <ClInclude Include="InID.h" />
-    <ClInclude Include="InPassword.h" />
-    <ClInclude Include="Open.h" />
+    <ClInclude Include="AppData.h" />
+    <ClInclude Include="States.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
