@@ -2,7 +2,7 @@
 State* mainLoop(event ev, State* curr, void* uData)
 {
 	int i = 0;
-	if (ev == NO_EVENT)
+	if (ev == BREAK)
 		return curr;
 	for (; curr->transitions[i].ev != END_OF_TABLE; i++)
 	if (curr->transitions[i].ev != END_OF_TABLE && ev == curr->transitions[i].ev)
@@ -10,7 +10,7 @@ State* mainLoop(event ev, State* curr, void* uData)
 		if (curr->transitions[i].tranFunc != NULL)
 		{
 			ev = curr->transitions[i].tranFunc(curr, ev, uData);
-			if (ev != NO_EVENT)
+			if (ev != BREAK)
 				return mainLoop(ev, curr->transitions[i].next, uData);
 		}
 		return curr->transitions[i].next;

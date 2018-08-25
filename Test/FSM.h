@@ -3,7 +3,7 @@
 typedef struct State State;
 typedef struct Transition Transition;
 typedef int event;
-enum { END_OF_TABLE, NO_EVENT,EVENT_BASE};
+enum {  NO_EVENT, END_OF_TABLE, BREAK,EVENT_BASE};
 
 struct State {
 	const char* name;

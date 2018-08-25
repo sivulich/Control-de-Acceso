@@ -4,7 +4,6 @@
 typedef struct {
 	unsigned currIDlen, currPassLen;
 	
-	char currID[MAX_ID_LEN];
-	char currPsswd[MAX_PASS_LEN];
-	int err;
+	char currID[MAX_ID_LEN+1];
+	char currPsswd[MAX_PASS_LEN+1];
 }AppData;

@@ -1,22 +1,17 @@
 #include "States.h"
-//Sacar esto despues
-#include <stdio.h>
-#include <string.h>
+#include "Keyboard.h"
 
 static event  InID_addKey(State* thi, event ev, void* uData)
 {
 	AppData* data = (AppData*)uData;
-	//++++++++++++++ Temporal despues tiene que llamar al driver
-	getchar();
-	char c = getchar();
-	//--------------
+	char c = readKb();
 	if (data->currIDlen < MAX_ID_LEN)
 	{
 		data->currID[data->currIDlen] = c;
 		data->currIDlen++;
 		if (data->currIDlen == MAX_ID_LEN)
 			return CONTINUE;
-		return NO_EVENT;
+		return BREAK;
 	}
 	else
 		return ERROR_WRONG_ID;
@@ -35,7 +30,7 @@ static event inIDLoop(State* thi, void* uData) {
 	AppData* data = (AppData*)uData;
 	if (data->currIDlen == MAX_ID_LEN)
 		return CONTINUE;
-	return NO_EVENT;
+	return BREAK;
 };
 
 State InID = { "IN ID",inIDLoop,TableInID };
