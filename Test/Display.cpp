@@ -72,9 +72,14 @@ static const unsigned char letters[] = {
 	0x33,
 	0x6D,
 };
-
+//Sacar
+#include <stdio.h>
 void print(char c, int pos)
 {
+	//++++TEMP
+	putchar(c);
+	return;
+	//----TEMP
 	if (0 <= pos && pos <= 3)
 	{
 		if ('0' <= c && c <= '1')

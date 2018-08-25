@@ -42,6 +42,18 @@
     <ClCompile Include="Display.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CardReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EventGenerator.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FSM.h">
@@ -60,6 +72,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Display.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CardReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EventGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

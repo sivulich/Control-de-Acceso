@@ -2,19 +2,25 @@
 #include "States.h"
 #include "Keyboard.h"
 
-static event Idle_InID(State* thi, event ev, void* uData)
+static event Idle_Check(State* thi, event ev, void* uData)
 {
 	AppData* data = (AppData*)uData;
 	char c = readKb();
-	data->currID[0] = c;
-	data->currIDlen++;
+	if (c <= '9' && '0' <= c)
+	{
+		data->currID[0] = c;
+		data->currIDlen++;
+		return CONTINUE;
+	}
+	
 	return BREAK;
 }
 
 static const Transition TableIdle[] = {
-	{ CARD_SLIDE,NULL,&InPassword },//Idle_InPassword
-	{ KEY_PRESS,Idle_InID,&InID },      //Idle_InID
-							   //Falta agregar modo admin
+	{ CARD_SWIPE,NULL,&InPassword },     //Idle_InPassword
+	{ KEY_PRESS,Idle_Check,&Idle },      //Idle_InID
+	{ CONTINUE, NULL,&InID },
+	//Falta agregar modo admin
 	{ END_OF_TABLE,NULL, &Idle }
 };
 static event idleLoop(State* thi, void* uData) {

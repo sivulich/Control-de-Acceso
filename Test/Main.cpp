@@ -1,16 +1,7 @@
-#include <assert.h>
-#include <limits.h>
-#include <math.h>
-#include <stdbool.h>
-#include <stddef.h>
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctime>
 #include "States.h"
-#include "Keyboard.h"
-#include <conio.h>
+#include "EventGenerator.h"
+#include <ctime>
+#include "UI.h"
 int main(void)
 {
 	
@@ -26,13 +17,9 @@ int main(void)
 	clock_t c=clock();
 	for (int i = 0; ; i++)
 	{
-		if (_kbhit())
-		{
-			ev = KEY_PRESS;
+		ev = getEvent();
+		if (ev == KEY_PRESS)
 			del = 1;
-		}
-		else
-			ev = NO_EVENT;
 		curr = mainLoop((event)ev, curr, (void* )&data);
 		if (del == 1)
 		{
@@ -42,8 +29,10 @@ int main(void)
 		if (((double)clock() - c) / CLOCKS_PER_SEC > 0.2)
 		{
 			system("cls");
-			printf("CurrentState= %s\nCurrent ID= %s\nCurrent Password= %s\n\n", curr->name, data.currID, data.currPsswd);
+			printf("CurrentState= %s\nCurrent ID= %s\nCurrent Password= %s\nDisplay 7 seg:", curr->name, data.currID, data.currPsswd);
+			uiLoop(curr, ev, &data);
 			c = clock();
+			
 		}
 	}
 		

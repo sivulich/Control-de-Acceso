@@ -20,7 +20,7 @@ static event  InID_addKey(State* thi, event ev, void* uData)
 static const Transition TableInID[] = {
 	{ KEY_PRESS,InID_addKey,&InID }, //InID_addKey
 	{ CONTINUE,NULL,&InPassword }, //InID_InPassword
-	{ CARD_SLIDE,NULL,&Idle }, //error
+	{ CARD_SWIPE,NULL,&Idle }, //error
 	{ ERROR_WRONG_ID,NULL,&Idle },
 	{ ERROR_TIME_OUT,NULL,&Idle },
 	{ END_OF_TABLE,NULL,&InID }
