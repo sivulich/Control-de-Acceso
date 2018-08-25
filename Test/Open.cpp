@@ -5,10 +5,10 @@
 /*static void open_wait();*/
 typedef struct {
 	clock_t c;
-} dat;
+} openDat;
 static event Open_ResetTimer(State* thi, event ev, void* uData)
 {
-	dat* mydat = (dat*)thi->stateData;
+	openDat* mydat = (openDat*)thi->stateData;
 	mydat->c = getTime();
 	return BREAK;
 }
@@ -19,10 +19,10 @@ static const Transition TableOpen[] = {
 };
 static event openLoop(State* thi, void* uData) {
 	AppData* data = (AppData*)uData;
-	dat* mydat = (dat*) thi->stateData;
+	openDat* mydat = (openDat*) thi->stateData;
 	if (((double)getTime() - mydat->c) / CLOCKS_PER_SEC > 5)
 		return CONTINUE;
 	return BREAK;
 };
-dat data;
+openDat data;
 State Open = { "OPEN",openLoop,TableOpen,(void*)&data };

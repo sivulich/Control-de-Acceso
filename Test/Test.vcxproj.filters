@@ -45,13 +45,13 @@
     <ClCompile Include="CardReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EventGenerator.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="UI.h">
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="UI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EventGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
