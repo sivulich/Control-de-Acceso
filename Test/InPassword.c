@@ -81,6 +81,6 @@ static event inPsswdLoop(State* thi, void* uData) {
 };
 
 
-InPasswordDat data = { 0 };
+static InPasswordDat data = { 0 };
 State InPassword = { "IN PSSWD",inPsswdLoop,TableInPassword, &data };
 

@@ -15,43 +15,43 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InID.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FSM.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InPassword.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Idle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Open.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Keyboard.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Clock.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Display.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CardReader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="UI.h">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="UI.cpp">
+    <ClCompile Include="UI.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EventGenerator.cpp">
+    <ClCompile Include="Open.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Keyboard.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InPassword.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InID.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Idle.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EventGenerator.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Display.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Clock.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CardReader.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

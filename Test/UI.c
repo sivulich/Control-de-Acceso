@@ -1,7 +1,7 @@
 #include "UI.h"
 #include "Clock.h"
-clock_t timer = 0;
-State* lastState=0;
+static clock_t timer = 0;
+static State* lastState=0;
 void uiLoop(State* curr, event ev, AppData* data) {
 	if (curr == &Open)
 	{
@@ -24,14 +24,14 @@ void uiLoop(State* curr, event ev, AppData* data) {
 	}
 	else if (curr == &InID)
 	{
-		for (int i = (data->currIDlen ) < 4 ? 0 : (data->currIDlen - 4); i < data->currIDlen; i++)
+		for (unsigned i = (data->currIDlen ) < 4 ? 0 : (data->currIDlen - 4); i < data->currIDlen; i++)
 			print(data->currID[i], 0);
 		//temp
 		print('\n', 3);
 	}
 	else if (curr == &InPassword)
 	{
-		for (int i = (data->currPassLen ) < 4 ? 0 : (data->currPassLen - 4); i < data->currPassLen; i++)
+		for (unsigned  i = (data->currPassLen ) < 4 ? 0 : (data->currPassLen - 4); i < data->currPassLen; i++)
 			print('*', 1);
 		//temp
 		print('\n', 3);

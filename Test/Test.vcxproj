@@ -117,18 +117,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CardReader.cpp" />
-    <ClCompile Include="Clock.cpp" />
-    <ClCompile Include="Display.cpp" />
-    <ClCompile Include="EventGenerator.cpp" />
-    <ClCompile Include="FSM.cpp" />
-    <ClCompile Include="Idle.cpp" />
-    <ClCompile Include="InID.cpp" />
-    <ClCompile Include="InPassword.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Open.cpp" />
-    <ClCompile Include="Keyboard.cpp" />
-    <ClCompile Include="UI.cpp" />
+    <ClCompile Include="CardReader.c" />
+    <ClCompile Include="Clock.c" />
+    <ClCompile Include="Display.c" />
+    <ClCompile Include="EventGenerator.c" />
+    <ClCompile Include="FSM.c" />
+    <ClCompile Include="Idle.c" />
+    <ClCompile Include="InID.c" />
+    <ClCompile Include="InPassword.c" />
+    <ClCompile Include="Main.c" />
+    <ClCompile Include="Open.c" />
+    <ClCompile Include="Keyboard.c" />
+    <ClCompile Include="UI.c" />
     <ClCompile Include="UI.h" />
   </ItemGroup>
   <ItemGroup>

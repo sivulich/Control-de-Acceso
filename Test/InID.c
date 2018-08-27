@@ -56,5 +56,5 @@ static event inIDLoop(State* thi, void* uData) {
 		return CONTINUE;
 	return BREAK;
 };
-InIDdat data = {0};
+static InIDdat data = {0};
 State InID = { "IN ID",inIDLoop,TableInID,&data };

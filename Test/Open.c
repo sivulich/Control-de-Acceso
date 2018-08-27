@@ -24,5 +24,5 @@ static event openLoop(State* thi, void* uData) {
 		return CONTINUE;
 	return BREAK;
 };
-openDat data;
+static openDat data;
 State Open = { "OPEN",openLoop,TableOpen,(void*)&data };

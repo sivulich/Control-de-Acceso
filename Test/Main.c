@@ -1,7 +1,7 @@
 #include "States.h"
 #include "EventGenerator.h"
-#include <ctime>
 #include "UI.h"
+#include "Clock.h"
 int main(void)
 {
 	
@@ -26,7 +26,7 @@ int main(void)
 			del = 0;
 			kbFlush();
 		}
-		if (((double)clock() - c) / CLOCKS_PER_SEC > 0.2)
+		if (((double)getTime() - c) / CLOCKS_PER_SEC > 0.2)
 		{
 			system("cls");
 			printf("CurrentState= %s\nCurrent ID= %s\nCurrent Password= %s\nDisplay 7 seg:", curr->name, data.currID, data.currPsswd);
