@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="UI.h">
+      <Filter>Headers</Filter>
+    </ClCompile>
+    <ClCompile Include="CardReader.c">
+      <Filter>Source\Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="Clock.c">
+      <Filter>Source\Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="Display.c">
+      <Filter>Source\Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="Keyboard.c">
+      <Filter>Source\Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="EventGenerator.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Idle.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="InID.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="InPassword.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Open.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CardReader.h">
+      <Filter>Headers\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="AppData.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Clock.h">
+      <Filter>Headers\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="Display.h">
+      <Filter>Headers\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="EventGenerator.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="FSM.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Keyboard.h">
+      <Filter>Headers\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="States.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{c484ef86-80ab-4cf6-9977-569e6d63c2d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Drivers">
+      <UniqueIdentifier>{5bce4239-03fb-487f-bec1-879cac490d87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{b81d2c76-c2a2-4c19-929a-97410df9361e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Driver">
+      <UniqueIdentifier>{00c29aa8-4bf3-4a43-9e9c-049d145bf867}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

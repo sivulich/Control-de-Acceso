@@ -8,6 +8,7 @@ void uiLoop(State* curr, event ev, AppData* data) {
 		print('O', 3);
 		print('P', 2);
 		print('E', 1);
+		
 		print('N', 0);
 		//temp
 		print('\n', 0);
