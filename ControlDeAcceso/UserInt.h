@@ -1,4 +1,4 @@
-#include "Display.h"
+#pragma once
 #include "AppData.h"
 #include "States.h"
 

@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="UI.h">
-      <Filter>Headers</Filter>
-    </ClCompile>
     <ClCompile Include="CardReader.c">
       <Filter>Source\Driver</Filter>
     </ClCompile>
@@ -37,7 +34,13 @@
     <ClCompile Include="Open.c">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="UI.c">
+    <ClCompile Include="MuxKbDs.c">
+      <Filter>Source\Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInt.h">
+      <Filter>Headers</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInt.c">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -65,6 +68,15 @@
     </ClInclude>
     <ClInclude Include="States.h">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Gpio.h">
+      <Filter>Headers\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="Board.h">
+      <Filter>Headers\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="MuxKbDs.h">
+      <Filter>Headers\Drivers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

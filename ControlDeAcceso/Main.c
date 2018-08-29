@@ -1,10 +1,14 @@
 #include "States.h"
 #include "EventGenerator.h"
-#include "UI.h"
 #include "Clock.h"
+#include "UserInt.h"
+#include "MuxKbDs.h"
 int main(void)
 {
-	
+	muxKbDsInit();
+	muxKbDsInit();
+	muxKbDsPISR();
+	getchar();
 	State* curr = &Idle;
 	AppData data;
 	data.currIDlen = 0;

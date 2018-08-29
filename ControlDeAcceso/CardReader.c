@@ -3,7 +3,7 @@ int hasCardValue()
 	return 0;
 }
 
-void getLastCard(char* dest) {
+void getCard(char* dest) {
 	return;
 }
 

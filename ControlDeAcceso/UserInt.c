@@ -1,5 +1,6 @@
-#include "UI.h"
+#include "UserInt.h"
 #include "Clock.h"
+#include "Display.h"
 static clock_t timer = 0;
 static State* lastState=0;
 void uiLoop(State* curr, event ev, AppData* data) {
@@ -8,7 +9,6 @@ void uiLoop(State* curr, event ev, AppData* data) {
 		print('O', 3);
 		print('P', 2);
 		print('E', 1);
-		
 		print('N', 0);
 		//temp
 		print('\n', 0);
