@@ -1,23 +1,22 @@
-#pragma once
 #include "MuxKbDs.h"
-#include "Gpio.h"
-#define COL_0 0
-#define COL_1 1
-#define COL_2 2
-#define ROW_0 0
-#define ROW_1 1
-#define ROW_2 2
-#define ROW_3 3
-#define DISP_A 0
-#define DISP_B 1
-#define DISP_C 2
-#define DISP_D 3
-#define DISP_E 4
-#define DISP_F 5
-#define DISP_G 6
-#define DISP_P 7
-#define LED    8
-static uint8_t sevenSegments[8] = { DISP_A,DISP_B,DISP_C,DISP_D,DISP_E, DISP_F, DISP_G, DISP_P };
+#include "gpio.h"
+#define COL_0 PORTNUM2PIN(PC,17)
+#define COL_1 PORTNUM2PIN(PB,19)
+#define COL_2 PORTNUM2PIN(PC,16)
+#define ROW_0 PORTNUM2PIN(PA,1)
+#define ROW_1 PORTNUM2PIN(PC,8)
+#define ROW_2 PORTNUM2PIN(PB,9)
+#define ROW_3 PORTNUM2PIN(PC,1)
+#define DISP_A PORTNUM2PIN(PC,3)
+#define DISP_B PORTNUM2PIN(PC,5)
+#define DISP_C PORTNUM2PIN(PC,2)
+#define DISP_D PORTNUM2PIN(PC,7)
+#define DISP_E PORTNUM2PIN(PA,2)
+#define DISP_F PORTNUM2PIN(PC,0)
+#define DISP_G PORTNUM2PIN(PB,23)
+#define DISP_P PORTNUM2PIN(PC,9)
+#define LED    PORTNUM2PIN(PB,18)
+static uint8_t sevenSegments[8] = { DISP_G,DISP_F,DISP_E,DISP_D,DISP_C, DISP_B, DISP_A, DISP_P };
 
 static uint8_t rows[ROWS] = {   ROW_0,ROW_1, ROW_2, ROW_3 };
 static uint8_t cols[COLUMNS] = {  COL_0,COL_1, COL_2 };
@@ -56,10 +55,11 @@ void muxKbDsWriteDisplay(unsigned char ds,unsigned int pos)
 		display[pos] = ds;
 }
 
-void muxKbDsGetKbState(unsigned char** kbS) {
+void muxKbDsGetKbState(unsigned char (*kbS)[COLUMNS]) {
 	for (unsigned i = 0; i < ROWS; i++)
 		for (unsigned j = 0; j < COLUMNS; j++)
-			kbS[i][j] = kbState[i][j];
+				kbS[i][j] = kbState[i][j];
+
 }
 
 void muxKbDsPISR()
@@ -72,9 +72,10 @@ void muxKbDsPISR()
 	else
 		active = 0;
 	unsigned i = active;
-	digitalWrite(rows[active], 0);
-	for (unsigned j = 0; j < COLUMNS; j++)
-		kbState[i][j] = digitalRead(cols[j]);
+
 	for (unsigned j = 0; j < 8; j++)
 		digitalWrite(sevenSegments[j], (display[i] >> j) & 1);
+	digitalWrite(rows[i], 0);
+	for (unsigned j = 0; j < COLUMNS; j++)
+			kbState[i][j] = digitalRead(cols[j]);
 }

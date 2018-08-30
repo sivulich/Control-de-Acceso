@@ -1,4 +1,6 @@
 #pragma once
+#ifndef CLOCK_H
+#define CLOCK_H
 //Sacar esto
 #include <time.h>
 //Reemplazar por 100kHz
@@ -7,4 +9,6 @@
 #define clock_t clock_t
 
 clock_t getTime();
+#endif // !CLOCK_H
+
 

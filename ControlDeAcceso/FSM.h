@@ -1,9 +1,11 @@
 #pragma once
+#ifndef FSM_H
+#define FSM_H
 #include <stdlib.h>
 typedef struct State State;
 typedef struct Transition Transition;
 typedef int event;
-enum {  NO_EVENT, END_OF_TABLE, BREAK,EVENT_BASE};
+enum { NO_EVENT, END_OF_TABLE, BREAK, EVENT_BASE };
 
 struct State {
 	const char* name;
@@ -18,3 +20,5 @@ struct Transition {
 };
 
 State* mainLoop(event ev, State* curr, void* uData);
+#endif // !FSM_H
+

@@ -1,5 +1,7 @@
 #pragma once
 
+#ifndef MUXKBDS_H
+#define MUXKBDS_H
 #define DISPLAYS 4
 #define ROWS 4
 #define COLUMNS 3
@@ -10,4 +12,6 @@ int muxKbDsInit();
 
 void muxKbDsWriteDisplay(unsigned char ds, unsigned int pos);
 
-void muxKbDsGetKbState(unsigned char** kbState);
+void muxKbDsGetKbState(unsigned char (*kbS)[COLUMNS]);
+#endif // !MUXKBDS_H
+

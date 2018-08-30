@@ -6,6 +6,7 @@ static State* lastState=0;
 void uiLoop(State* curr, event ev, AppData* data) {
 	if (curr == &Open)
 	{
+
 		print('O', 3);
 		print('P', 2);
 		print('E', 1);
