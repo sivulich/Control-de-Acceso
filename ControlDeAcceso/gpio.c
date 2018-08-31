@@ -6,6 +6,49 @@
  */
 
 #include "gpio.h"
+#ifdef _WIN32 
+#include <stdio.h>
+//#define GPIO_DEBUG
+static char ports[] = { 'A','B','C','D','E','F' };
+uint8_t digitalRead(uint8_t pin)
+{
+	int port = pin >> 5;
+
+	int portPin = pin % 32;
+#ifdef GPIO_DEBUG
+	printf("Reading port %c pin %d\n",ports[port],portPin);
+#endif
+	return 0;
+}
+void pinMode(uint8_t pin, uint8_t mode)
+{
+	int port = pin >> 5;
+
+	int portPin = pin % 32;
+#ifdef GPIO_DEBUG
+	printf("Setting port %c pin %d, mode = %d\n", ports[port], portPin,mode);
+#endif
+}
+void digitalWrite(uint8_t pin, uint8_t value)
+{
+	int port = pin >> 5;
+
+	int portPin = pin % 32;
+#ifdef GPIO_DEBUG
+	printf("Writing port %c pin %d, value = %d\n", ports[port], portPin, value);
+#endif
+}
+void digitalToggle(uint8_t pin)
+{
+	int port = pin >> 5;
+
+	int portPin = pin % 32;
+#ifdef GPIO_DEBUG
+	printf("Toggling port %c pin %d\n", ports[port], portPin);
+#endif
+}
+
+#else
 #include "hardware.h"
 
 GPIO_Type*  gpioLU[5] = GPIO_BASE_PTRS;
@@ -65,3 +108,4 @@ uint8_t digitalRead (uint8_t pin)
 
 	return (ptr->PDIR>>portPin & 1) ;
 }
+#endif

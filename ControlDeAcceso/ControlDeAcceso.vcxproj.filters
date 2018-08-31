@@ -19,21 +19,6 @@
     <ClCompile Include="FSM.c">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Idle.c">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="InID.c">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="InPassword.c">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Main.c">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Open.c">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="MuxKbDs.c">
       <Filter>Source\Driver</Filter>
     </ClCompile>
@@ -42,6 +27,33 @@
     </ClCompile>
     <ClCompile Include="UserInt.c">
       <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="gpio.c">
+      <Filter>Source\Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="Leds.c">
+      <Filter>Source\Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="SysTick.c">
+      <Filter>Source\Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="App.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="main.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Idle.c">
+      <Filter>Source\States</Filter>
+    </ClCompile>
+    <ClCompile Include="InID.c">
+      <Filter>Source\States</Filter>
+    </ClCompile>
+    <ClCompile Include="InPassword.c">
+      <Filter>Source\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Open.c">
+      <Filter>Source\States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -69,13 +81,19 @@
     <ClInclude Include="States.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Gpio.h">
-      <Filter>Headers\Drivers</Filter>
-    </ClInclude>
     <ClInclude Include="Board.h">
       <Filter>Headers\Drivers</Filter>
     </ClInclude>
     <ClInclude Include="MuxKbDs.h">
+      <Filter>Headers\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="SysTick.h">
+      <Filter>Headers\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="gpio.h">
+      <Filter>Headers\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="Leds.h">
       <Filter>Headers\Drivers</Filter>
     </ClInclude>
   </ItemGroup>
@@ -91,6 +109,9 @@
     </Filter>
     <Filter Include="Source\Driver">
       <UniqueIdentifier>{00c29aa8-4bf3-4a43-9e9c-049d145bf867}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\States">
+      <UniqueIdentifier>{c4b65dd5-057e-4761-b89f-1a19fb012a31}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

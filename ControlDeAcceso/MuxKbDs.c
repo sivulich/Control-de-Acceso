@@ -1,5 +1,6 @@
 #include "MuxKbDs.h"
 #include "gpio.h"
+#include "SysTick.h"
 #define COL_0 PORTNUM2PIN(PC,17)
 #define COL_1 PORTNUM2PIN(PB,19)
 #define COL_2 PORTNUM2PIN(PC,16)
@@ -28,23 +29,33 @@ static unsigned int active = 0;
 static unsigned char display[DISPLAYS];
 
 static unsigned char kbState[ROWS][COLUMNS] = { {0,0,0},{0,0,0},{0,0,0},{0,0,0} };
-
+void muxKbDsPISR();
+void muxKbDsLed(int v)
+{
+	digitalWrite(LED,v&&1);
+}
 int muxKbDsInit()
 {
 	if (init == 0)
 	{
-		for (unsigned i = 0; i < ROWS; i++)
-			pinMode(rows[i], OUTPUT);
-		for (unsigned i = 0; i < COLUMNS; i++)
-			pinMode(cols[i], INPUT_PULLDOWN);
-		for (unsigned i = 0; i < 8; i++)
-			pinMode(sevenSegments[i], OUTPUT);
-		pinMode(LED, OUTPUT);
-		for (unsigned i = 0; i < ROWS; i++)
-			digitalWrite(rows[i], 1);
-		//Registrar PISR en SysTick
+		if(SysTickInit()==1)
+		{
+			if(SysTickAddFunc(muxKbDsPISR)==1)
+			{
+				for (unsigned i = 0; i < ROWS; i++)
+					pinMode(rows[i], OUTPUT);
+				for (unsigned i = 0; i < COLUMNS; i++)
+					pinMode(cols[i], INPUT_PULLDOWN);
+				for (unsigned i = 0; i < 8; i++)
+					pinMode(sevenSegments[i], OUTPUT);
+				pinMode(LED, OUTPUT);
+				for (unsigned i = 0; i < ROWS; i++)
+					digitalWrite(rows[i], 1);
+				init = 1;
+			}
 
-		init = 1;
+		}
+
 	}
 	return init;
 }

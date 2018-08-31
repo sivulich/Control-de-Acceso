@@ -1,6 +1,9 @@
 #include "Keyboard.h"
 #include "MuxKbDs.h"
-#include <stdio.h>  
+#include <stdio.h> 
+#ifdef _WIN32 
+#include <conio.h>
+#endif
 #define KB_BUF_LEN 256
 static unsigned char kbState[ROWS][COLUMNS] = { { 0,0,0 },{ 0,0,0 },{ 0,0,0 },{ 0,0,0 } };
 static unsigned char kbTime[ROWS][COLUMNS] = { { 0,0,0 },{ 0,0,0 },{ 0,0,0 },{ 0,0,0 } };
@@ -9,6 +12,13 @@ static unsigned char buffer[KB_BUF_LEN];
 static unsigned long long readPtr = 0, writePtr = 0;
 
 static const unsigned char pos2key[ROWS][COLUMNS]= { { '1','2','3' },{ '4','5','6' },{ '7','8','9' },{ '*','0','#' } };
+
+char kBPeek()
+{
+	if(kbHit()==1)
+		return buffer[readPtr%KB_BUF_LEN];
+	return 0;
+}
 int kBInit()
 {
 	return muxKbDsInit();
@@ -16,6 +26,7 @@ int kBInit()
 
 static void update()
 {
+#ifndef _WIN32 
 	muxKbDsGetKbState(newKbState);
 	for (unsigned i = 0; i < ROWS; i++)
 	{
@@ -23,7 +34,7 @@ static void update()
 		{
 			if (kbState[i][j] == 0 && newKbState[i][j] == 1)
 			{
-				if(kbTime[i][j]==50) //Cambiar el magic number por algo
+				if (kbTime[i][j] == 50) //Cambiar el magic number por algo
 				{
 					buffer[writePtr%KB_BUF_LEN] = pos2key[i][j];
 					kbState[i][j] = newKbState[i][j];
@@ -33,13 +44,22 @@ static void update()
 					kbTime[i][j]++;
 
 			}
-			else if(kbState[i][j] == 1 && newKbState[i][j] == 0)
+			else if (kbState[i][j] == 1 && newKbState[i][j] == 0)
 				kbState[i][j] = newKbState[i][j];
-			if(newKbState[i][j] == 0)
-				kbTime[i][j]=0;
+			if (newKbState[i][j] == 0)
+				kbTime[i][j] = 0;
 
 		}
 	}
+#else
+	if (_kbhit())
+	{
+		buffer[writePtr%KB_BUF_LEN] = _getch();
+		writePtr++;
+	}
+#endif // !_WIN32 
+
+	
 }
 char readKb(void)
 {

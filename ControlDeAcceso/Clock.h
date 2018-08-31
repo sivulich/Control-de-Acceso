@@ -1,13 +1,11 @@
 #pragma once
 #ifndef CLOCK_H
 #define CLOCK_H
-//Sacar esto
-#include <time.h>
 //Reemplazar por 100kHz
-//#define CLOCKS_PER_SEC CLOCKS_PER_SEC
+#define CLOCKS_PER_SEC 1000
 //Reemplazar por unsigned long long
-#define clock_t clock_t
-
+#define clock_t unsigned long long
+int clockInit();
 clock_t getTime();
 #endif // !CLOCK_H
 

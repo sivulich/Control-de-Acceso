@@ -88,6 +88,7 @@ static const unsigned char letters[] = {
 };
 void print(char c, int pos)
 {
+#ifndef _WIN32 
 	if (0 <= pos && pos <= 3)
 	{
 		if ('0' <= c && c <= '9')
@@ -106,4 +107,7 @@ void print(char c, int pos)
 				writeToDisp(0b0000001,pos);
 		}
 	}
+#else
+	putchar(c);
+#endif
 }

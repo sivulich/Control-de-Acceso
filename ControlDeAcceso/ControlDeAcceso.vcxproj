@@ -119,18 +119,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="App.c" />
     <ClCompile Include="CardReader.c" />
     <ClCompile Include="Clock.c" />
     <ClCompile Include="Display.c" />
     <ClCompile Include="EventGenerator.c" />
     <ClCompile Include="FSM.c" />
+    <ClCompile Include="gpio.c" />
     <ClCompile Include="Idle.c" />
     <ClCompile Include="InID.c" />
     <ClCompile Include="InPassword.c" />
-    <ClCompile Include="Main.c" />
+    <ClCompile Include="Leds.c" />
+    <ClCompile Include="main.c" />
     <ClCompile Include="MuxKbDs.c" />
     <ClCompile Include="Open.c" />
     <ClCompile Include="Keyboard.c" />
+    <ClCompile Include="SysTick.c" />
     <ClCompile Include="UserInt.c" />
     <ClCompile Include="UserInt.h" />
   </ItemGroup>
@@ -142,10 +146,12 @@
     <ClInclude Include="FSM.h" />
     <ClInclude Include="AppData.h" />
     <ClInclude Include="Display.h" />
-    <ClInclude Include="Gpio.h" />
+    <ClInclude Include="gpio.h" />
     <ClInclude Include="Keyboard.h" />
+    <ClInclude Include="Leds.h" />
     <ClInclude Include="MuxKbDs.h" />
     <ClInclude Include="States.h" />
+    <ClInclude Include="SysTick.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
