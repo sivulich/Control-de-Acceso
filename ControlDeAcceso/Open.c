@@ -15,6 +15,9 @@ static event Open_ResetTimer(State* thi, event ev, void* uData)
 static const Transition TableOpen[] = {
 	{ CONTINUE,NULL,&Idle },
 	{ OPEN,Open_ResetTimer,&Open },
+	{ ERROR_WRONG_PASS,NULL,&Idle },
+	{ ERROR_WRONG_ID,NULL,&Idle },
+	{ ERROR_TIME_OUT,NULL,&Idle },
 	{ END_OF_TABLE,NULL,&Open }
 };
 static event openLoop(State* thi, void* uData) {

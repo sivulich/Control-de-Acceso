@@ -2,6 +2,9 @@
 #include "Clock.h"
 #include "Display.h"
 #include "Leds.h"
+#ifdef _WIN32
+#include <stdio.h>
+#endif
 static clock_t timer = 0;
 static State* lastState=0;
 int uiInit()
@@ -57,13 +60,13 @@ void uiLoop(State* curr, event ev, AppData* data) {
 	{
 		ledsOff();
 		int pos=0;
-		print(' ', 3);
+		print('0'+data->currPassLen, 3);
 		print(' ', 2);
 		print(' ', 1);
 		print(' ', 0);
 		if(timer!=0)
 			timer=0;
-		for (unsigned  i = (data->currPassLen ) < 4 ? 0 : (data->currPassLen - 4); i < data->currPassLen; i++)
+		for (unsigned  i = (data->currPassLen ) < 3 ? 0 : (data->currPassLen - 3); i < data->currPassLen; i++)
 		{
 			pos=data->currPassLen-i-1;
 			print('*', pos);
@@ -88,8 +91,15 @@ void uiLoop(State* curr, event ev, AppData* data) {
 		timer = 0;
 	}
 #else
-	system("cls");
-	printf("CurrentState= %s\nCurrent ID= %s\nCurrent Password= %s\n", curr->name, data->currID, data->currPsswd);
+	if (timer == 0)
+		timer = getTime();
+	if ((double)(getTime() - timer) / CLOCKS_PER_SEC > 0.1)
+	{
+		system("cls");
+		printf("CurrentState= %s\nCurrent ID= %s\nCurrent Password= %s\n", curr->name, data->currID, data->currPsswd);
+		timer = getTime();
+	}
+	
 #endif
 	lastState = curr;
 }

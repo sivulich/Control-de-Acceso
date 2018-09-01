@@ -1,8 +1,8 @@
 #pragma once
 #ifndef APPDATA_H
 #define APPDATA_H
-#define  MAX_ID_LEN    8
-#define  MAX_PASS_LEN  4
+#define  MAX_ID_LEN    20
+#define  MAX_PASS_LEN  10
 typedef struct {
 	unsigned currIDlen, currPassLen;
 

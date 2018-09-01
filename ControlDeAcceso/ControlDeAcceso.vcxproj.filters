@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="CardReader.c">
-      <Filter>Source\Driver</Filter>
-    </ClCompile>
     <ClCompile Include="Clock.c">
       <Filter>Source\Driver</Filter>
     </ClCompile>
@@ -27,9 +24,6 @@
     </ClCompile>
     <ClCompile Include="UserInt.c">
       <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="gpio.c">
-      <Filter>Source\Driver</Filter>
     </ClCompile>
     <ClCompile Include="Leds.c">
       <Filter>Source\Driver</Filter>
@@ -55,11 +49,17 @@
     <ClCompile Include="Open.c">
       <Filter>Source\States</Filter>
     </ClCompile>
+    <ClCompile Include="Admin.cpp">
+      <Filter>Source\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Mcr.c">
+      <Filter>Source\Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="gpio.c">
+      <Filter>Source\Driver</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CardReader.h">
-      <Filter>Headers\Drivers</Filter>
-    </ClInclude>
     <ClInclude Include="AppData.h">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -90,10 +90,13 @@
     <ClInclude Include="SysTick.h">
       <Filter>Headers\Drivers</Filter>
     </ClInclude>
-    <ClInclude Include="gpio.h">
+    <ClInclude Include="Leds.h">
       <Filter>Headers\Drivers</Filter>
     </ClInclude>
-    <ClInclude Include="Leds.h">
+    <ClInclude Include="Mcr.h">
+      <Filter>Headers\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="gpio.h">
       <Filter>Headers\Drivers</Filter>
     </ClInclude>
   </ItemGroup>

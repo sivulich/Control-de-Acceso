@@ -34,7 +34,7 @@ static void update()
 		{
 			if (kbState[i][j] == 0 && newKbState[i][j] == 1)
 			{
-				if (kbTime[i][j] == 50) //Cambiar el magic number por algo
+				if (kbTime[i][j] == 100) //Cambiar el magic number por algo
 				{
 					buffer[writePtr%KB_BUF_LEN] = pos2key[i][j];
 					kbState[i][j] = newKbState[i][j];

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -78,6 +78,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -119,8 +120,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Admin.cpp" />
     <ClCompile Include="App.c" />
-    <ClCompile Include="CardReader.c" />
     <ClCompile Include="Clock.c" />
     <ClCompile Include="Display.c" />
     <ClCompile Include="EventGenerator.c" />
@@ -131,6 +132,7 @@
     <ClCompile Include="InPassword.c" />
     <ClCompile Include="Leds.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="Mcr.c" />
     <ClCompile Include="MuxKbDs.c" />
     <ClCompile Include="Open.c" />
     <ClCompile Include="Keyboard.c" />
@@ -140,7 +142,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
-    <ClInclude Include="CardReader.h" />
     <ClInclude Include="Clock.h" />
     <ClInclude Include="EventGenerator.h" />
     <ClInclude Include="FSM.h" />
@@ -149,6 +150,7 @@
     <ClInclude Include="gpio.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Leds.h" />
+    <ClInclude Include="Mcr.h" />
     <ClInclude Include="MuxKbDs.h" />
     <ClInclude Include="States.h" />
     <ClInclude Include="SysTick.h" />

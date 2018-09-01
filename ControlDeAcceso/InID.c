@@ -9,14 +9,14 @@ static event  InID_addKey(State* thi, event ev, void* uData)
 	AppData* data = (AppData*)uData;
 	InIDdat* myDat = (InIDdat*)thi->stateData;
 	char c = readKb();
-	if (c == '*' && data->currIDlen>0)
+	if (c == '*' && data->currIDlen > 0)
 	{
 		myDat->c = getTime();
 		data->currIDlen--;
 		data->currID[data->currIDlen] = 0;
 		return BREAK;
 	}
-	else if (c!='*' && c!='#' && data->currIDlen < MAX_ID_LEN)
+	else if (c != '*'&&c!='#'  && data->currIDlen < MAX_ID_LEN)
 	{
 		myDat->c = getTime();
 		data->currID[data->currIDlen] = c;
@@ -25,6 +25,8 @@ static event  InID_addKey(State* thi, event ev, void* uData)
 			return CONTINUE;
 		return BREAK;
 	}
+	else if (c == '#' && data->currIDlen > 0)
+		return CONTINUE;
 	else
 		return ERROR_WRONG_ID;
 }

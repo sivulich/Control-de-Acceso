@@ -1,6 +1,8 @@
 #include <stdlib.h>
+#include <string.h>
 #include "States.h"
 #include "Keyboard.h"
+#include "Mcr.h"
 
 static event Idle_Check(State* thi, event ev, void* uData)
 {
@@ -15,9 +17,16 @@ static event Idle_Check(State* thi, event ev, void* uData)
 	
 	return BREAK;
 }
+static event Idle_InPassword(State* thi, event ev, void* uData)
+{
+	AppData* data = (AppData*)uData;
+	getLastCard(data->currID);
+	data->currIDlen = strlen(data->currID);
+	return BREAK;
+}
 
 static const Transition TableIdle[] = {
-	{ CARD_SWIPE,NULL,&InPassword },     //Idle_InPassword
+	{ CARD_SWIPE,Idle_InPassword,&InPassword },     //Idle_InPassword
 	{ KEY_PRESS,Idle_Check,&Idle },      //Idle_InID
 	{ CONTINUE, NULL,&InID },
 	//Falta agregar modo admin

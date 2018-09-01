@@ -12,7 +12,9 @@
 #include "Clock.h"
 #include "UserInt.h"
 #include "Keyboard.h"
+#include "Mcr.h"
 #include <stdint.h>
+
 
 /*******************************************************************************
  * FUNCTION PROTOTYPES FOR PRIVATE FUNCTIONS WITH FILE LEVEL SCOPE
@@ -30,6 +32,7 @@ void App_Init (void)
 	clockInit();
 	uiInit();
 	kBInit();
+	mcrInit();
 }
 
 /* Función que se llama constantemente en un ciclo infinito */
