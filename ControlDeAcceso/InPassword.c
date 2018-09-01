@@ -2,6 +2,7 @@
 #include "Keyboard.h"
 #include <stdio.h>
 #include <string.h>
+#include "DataBase.h"
 #include "Clock.h"
 typedef struct {
 	clock_t c;
@@ -35,13 +36,6 @@ static event InPassword_Reset(State* thi, event ev, void* uData)
 	myDat->c = 0;
 	return BREAK;
 }
-static const char keys[254][2][MAX_ID_LEN + 1] = {
-	{ "4517660904766796","1996" },
-	{ "610531610388281039","19961" },
-	{"4517660114821704","1997"},
-
-	{ "12345678","1234" }
-};
 
 static event InPsswd_Open(State* thi, event ev, void* uData)
 {
@@ -49,6 +43,10 @@ static event InPsswd_Open(State* thi, event ev, void* uData)
 	AppData* data = (AppData*)uData;
 	myDat->c = 0;
 	unsigned char i = 0;
+	for (unsigned k = 0; k < data->currIDlen; k++)
+		data->currID[k] += k;
+	for (unsigned k = 0; k < data->currPassLen; k++)
+		data->currPsswd[k] += k;
 	while (keys[i][0][0] != 0)
 	{
 		if (!strcmp(keys[i][0], data->currID))

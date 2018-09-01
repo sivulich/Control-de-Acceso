@@ -1,6 +1,13 @@
 #include "Display.h"
 #include <ctype.h>
 #include "MuxKbDs.h"
+
+void setBrightness(int c) {
+	if(0<c && c<=MAX_BRIGHTNESS)
+		muxKbDsSetBrightness(MAX_BRIGHTNESS+1 - c);
+}
+
+
 int dispInit()
 {
 	int ret=muxKbDsInit();

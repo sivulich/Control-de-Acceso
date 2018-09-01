@@ -5,7 +5,7 @@
 #ifdef _WIN32
 #include <stdio.h>
 #endif
-static clock_t timer = 0;
+static clock_t timer = 0,ledTimer=0;
 static State* lastState=0;
 int uiInit()
 {
@@ -18,17 +18,27 @@ int uiInit()
 }
 void uiLoop(State* curr, event ev, AppData* data) {
 #ifndef _WIN32 
+	if(curr !=&Open && ledTimer!=0)
+		ledTimer = 0;
 	if (curr == &Open)
 	{
-		ledsOff();
+		if(ledTimer==0)
+			ledsOff();
 		print('O', 3);
 		print('P', 2);
 		print('E', 1);
 		print('N', 0);
 		ledsGreen(1);
+		if(ledTimer==0)
+		{
+			ledTimer=getTime();
+			ledsBoard(1);
+		}
+
 	}
 	else if (timer>0||(lastState == &InPassword && curr==&Idle) || (lastState == &InID && curr == &Idle))
 	{
+
 		ledsOff();
 		print('E', 3);
 		print('r', 2);
@@ -82,12 +92,32 @@ void uiLoop(State* curr, event ev, AppData* data) {
 		print(' ', 0);
 		ledsBlue(1);
 	}
+	else if (curr == &Admin)
+	{
+		ledsOff();
+		print('S', 3);
+		print('u', 2);
+		print('d', 1);
+		print('o', 0);
+		ledsBlue(1);
+		ledsRed(1);
+	}
+
+	if(ledTimer!=0 &&((double)getTime() - ledTimer) / CLOCKS_PER_SEC > 0.5)
+	{
+		if(ledTimer%1000<500)
+			ledsBoard(0);
+		else
+			ledsBoard(1);
+		ledTimer=getTime();
+	}
 	if (timer!=0 && ((double)getTime() - timer) / CLOCKS_PER_SEC > 2)
 	{
 		print(' ', 3);
 		print(' ', 2);
 		print(' ', 1);
 		print(' ', 0);
+		ledsOff();
 		timer = 0;
 	}
 #else

@@ -23,9 +23,10 @@ static uint8_t rows[ROWS] = {   ROW_0,ROW_1, ROW_2, ROW_3 };
 static uint8_t cols[COLUMNS] = {  COL_0,COL_1, COL_2 };
 
 static unsigned char init = 0;
-
+static unsigned long long nCall=0;
 static unsigned int active = 0;
 
+static unsigned char brightness=1;
 static unsigned char display[DISPLAYS];
 
 static unsigned char kbState[ROWS][COLUMNS] = { {0,0,0},{0,0,0},{0,0,0},{0,0,0} };
@@ -76,17 +77,25 @@ void muxKbDsGetKbState(unsigned char (*kbS)[COLUMNS]) {
 void muxKbDsPISR()
 {
 	//Pensar si checkear los tics aca o en la funcion de systick
+	nCall++;
 	digitalWrite(rows[active], 1);
-
 	if (active < ROWS - 1)
 		active++;
 	else
 		active = 0;
 	unsigned i = active;
 
-	for (unsigned j = 0; j < 8; j++)
-		digitalWrite(sevenSegments[j], (display[i] >> j) & 1);
+	if((nCall/4)%brightness==0)
+		for (unsigned j = 0; j < 8; j++)
+			digitalWrite(sevenSegments[j], (display[i] >> j) & 1);
+	else
+		for (unsigned j = 0; j < 8; j++)
+			digitalWrite(sevenSegments[j], (0 >> j) & 1);
 	digitalWrite(rows[i], 0);
 	for (unsigned j = 0; j < COLUMNS; j++)
 			kbState[i][j] = digitalRead(cols[j]);
+}
+void muxKbDsSetBrightness(unsigned c)
+{
+	brightness = c;
 }

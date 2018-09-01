@@ -14,6 +14,8 @@ static event Idle_Check(State* thi, event ev, void* uData)
 		data->currIDlen++;
 		return CONTINUE;
 	}
+	else if (c == '#')
+		return ADMIN;
 	
 	return BREAK;
 }
@@ -29,7 +31,7 @@ static const Transition TableIdle[] = {
 	{ CARD_SWIPE,Idle_InPassword,&InPassword },     //Idle_InPassword
 	{ KEY_PRESS,Idle_Check,&Idle },      //Idle_InID
 	{ CONTINUE, NULL,&InID },
-	//Falta agregar modo admin
+	{ ADMIN,NULL,&Admin },
 	{ END_OF_TABLE,NULL, &Idle }
 };
 static event idleLoop(State* thi, void* uData) {

@@ -8,5 +8,6 @@ event getEvent()
 		return CARD_SWIPE;
 	else if (kbHit())
 		return KEY_PRESS;
+
 	return NO_EVENT;
 }

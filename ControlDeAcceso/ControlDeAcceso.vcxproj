@@ -120,7 +120,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Admin.cpp" />
+    <ClCompile Include="Admin.c" />
     <ClCompile Include="App.c" />
     <ClCompile Include="Clock.c" />
     <ClCompile Include="Display.c" />
@@ -143,6 +143,7 @@
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="Clock.h" />
+    <ClInclude Include="DataBase.h" />
     <ClInclude Include="EventGenerator.h" />
     <ClInclude Include="FSM.h" />
     <ClInclude Include="AppData.h" />

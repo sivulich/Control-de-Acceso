@@ -28,6 +28,12 @@ static void update()
 {
 #ifndef _WIN32 
 	muxKbDsGetKbState(newKbState);
+	unsigned keyP=0;
+	for (unsigned i = 0; i < ROWS; i++)
+		for (unsigned j = 0; j < COLUMNS; j++)
+			keyP+=newKbState[i][j];
+	if(keyP>1)
+		return;
 	for (unsigned i = 0; i < ROWS; i++)
 	{
 		for (unsigned j = 0; j < COLUMNS; j++)
