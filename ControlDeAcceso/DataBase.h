@@ -1,10 +1,8 @@
 #ifndef DATABASE_H
 #define DATABASE_H
-char keys[254][2][MAX_ID_LEN + 1] = {
-	{ "463::;6@8=AABDGE" , "97" },
-	{ "622876<88<BC>E??CJ" , "1:;9" },
-	{ "463::;689=B==D>C" , "58" },
-	{ "13579;=?" , "1357" }
-};
+#include "AppData.h"
+#define MASTER_PASS "26:3"
+extern char keys[MAX_USERS][2][MAX_ID_LEN + 1];
+void encrypt(char*);
 #endif // !DATABASE_H
 

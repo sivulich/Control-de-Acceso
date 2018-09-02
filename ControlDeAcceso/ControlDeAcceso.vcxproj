@@ -123,6 +123,7 @@
     <ClCompile Include="Admin.c" />
     <ClCompile Include="App.c" />
     <ClCompile Include="Clock.c" />
+    <ClCompile Include="DataBase.c" />
     <ClCompile Include="Display.c" />
     <ClCompile Include="EventGenerator.c" />
     <ClCompile Include="FSM.c" />

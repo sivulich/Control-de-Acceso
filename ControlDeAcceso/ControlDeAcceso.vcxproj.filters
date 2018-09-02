@@ -58,6 +58,9 @@
     <ClCompile Include="Admin.c">
       <Filter>Source\States</Filter>
     </ClCompile>
+    <ClCompile Include="DataBase.c">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppData.h">

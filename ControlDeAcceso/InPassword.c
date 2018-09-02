@@ -6,7 +6,13 @@
 #include "Clock.h"
 typedef struct {
 	clock_t c;
+	/*Bits: N N N N | N N s2 s1*/
+	unsigned char uFlags[MAX_USERS];
 } InPasswordDat;
+#define STRIKE_1 0b01
+#define STRIKE_2 0b10
+#define BLOCKED  0b11
+
 static event  InPsswd_addKey(State* thi, event ev, void* uData)
 {
 	AppData* data = (AppData*)uData;
@@ -34,6 +40,7 @@ static event InPassword_Reset(State* thi, event ev, void* uData)
 {
 	InPasswordDat* myDat = (InPasswordDat*)thi->stateData;
 	myDat->c = 0;
+	kbFlush();
 	return BREAK;
 }
 
@@ -43,18 +50,40 @@ static event InPsswd_Open(State* thi, event ev, void* uData)
 	AppData* data = (AppData*)uData;
 	myDat->c = 0;
 	unsigned char i = 0;
-	for (unsigned k = 0; k < data->currIDlen; k++)
-		data->currID[k] += k;
-	for (unsigned k = 0; k < data->currPassLen; k++)
-		data->currPsswd[k] += k;
+	encrypt(data->currID);
+	encrypt(data->currPsswd);
 	while (keys[i][0][0] != 0)
 	{
 		if (!strcmp(keys[i][0], data->currID))
 		{
+			if ((myDat->uFlags[i] & BLOCKED) == BLOCKED)
+			{
+				if (strcmp(MASTER_PASS, data->currPsswd))
+					return ERROR_WRONG_ID;
+				else
+				{
+					myDat->uFlags[i] = myDat->uFlags[i] & ~BLOCKED;
+					return OPEN;
+				}
+			}
+
 			if (!strcmp(keys[i][1], data->currPsswd))
+			{
+				myDat->uFlags[i] = myDat->uFlags[i] & ~BLOCKED;
 				return OPEN;
+			}
 			else
+			{
+				if ((myDat->uFlags[i] & BLOCKED) != STRIKE_2)
+					if ((myDat->uFlags[i] & BLOCKED) != STRIKE_1)
+						myDat->uFlags[i] |= STRIKE_1;
+					else
+						myDat->uFlags[i] = (myDat->uFlags[i] & ~BLOCKED) | STRIKE_2;
+				else
+					myDat->uFlags[i] |= BLOCKED;
+
 				return ERROR_WRONG_PASS;
+			}
 		}
 		i++;
 	}
@@ -62,11 +91,11 @@ static event InPsswd_Open(State* thi, event ev, void* uData)
 }
 static const Transition TableInPassword[] = {
 	{ KEY_PRESS,InPsswd_addKey,&InPassword },
-	{ CONTINUE,InPsswd_Open,&Open },
-	{ ERROR_WRONG_PASS,InPassword_Reset,&Idle },
-	{ ERROR_WRONG_ID,InPassword_Reset,&Idle },
-	{ ERROR_TIME_OUT,InPassword_Reset,&Idle },
-	{ END_OF_TABLE,NULL,&InPassword }
+{ CONTINUE,InPsswd_Open,&Open },
+{ ERROR_WRONG_PASS,InPassword_Reset,&Idle },
+{ ERROR_WRONG_ID,InPassword_Reset,&Idle },
+{ ERROR_TIME_OUT,InPassword_Reset,&Idle },
+{ END_OF_TABLE,NULL,&InPassword }
 };
 
 
