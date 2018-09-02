@@ -21,7 +21,6 @@ static const Transition TableOpen[] = {
 	{ END_OF_TABLE,NULL,&Open }
 };
 static event openLoop(State* thi, void* uData) {
-	AppData* data = (AppData*)uData;
 	openDat* mydat = (openDat*) thi->stateData;
 	if (((double)getTime() - mydat->c) / CLOCKS_PER_SEC > 5)
 		return CONTINUE;

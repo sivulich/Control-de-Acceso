@@ -5,8 +5,10 @@
 #ifdef _WIN32
 #include <stdio.h>
 #endif
+
 static clock_t timer = 0,ledTimer=0;
 static State* lastState=0;
+
 int uiInit()
 {
 	if(clockInit()==1)
@@ -95,10 +97,55 @@ void uiLoop(State* curr, event ev, AppData* data) {
 	else if (curr == &Admin)
 	{
 		ledsOff();
-		print('S', 3);
-		print('u', 2);
-		print('d', 1);
-		print('o', 0);
+		if(timer!=0)
+			timer=0;
+		if(data->auData.state==0)
+		{
+			print('S', 3);
+			print('u', 2);
+			print('d', 1);
+			print('o', 0);
+		}
+		else if(data->auData.state==1)
+		{
+			print('P', 3);
+			print('A', 2);
+			print('S', 1);
+			print('S', 0);
+		}
+		else if(data->auData.state==2)
+		{
+			print('U', 3);
+			print('S', 2);
+			print('E', 1);
+			print('r', 0);
+		}
+		else if(data->auData.state==3)
+		{
+			int pos=0;
+			print(' ', 3);
+			print(' ', 2);
+			print(' ', 1);
+			print(' ', 0);
+			for (unsigned i = (data->auData.newIDlen ) < 4 ? 0 : (data->auData.newIDlen - 4); i < data->auData.newIDlen; i++)
+			{
+				pos=data->auData.newIDlen-i-1;
+				print(data->auData.newID[i], pos);
+			}
+		}
+		else if(data->auData.state==5)
+		{
+			int pos=0;
+			print('0'+data->auData.newPassLen, 3);
+			print(' ', 2);
+			print(' ', 1);
+			print(' ', 0);
+			for (unsigned  i = (data->auData.newPassLen ) < 3 ? 0 : (data->auData.newPassLen - 3); i < data->auData.newPassLen; i++)
+			{
+				pos=data->auData.newPassLen-i-1;
+				print('*', pos);
+			}
+		}
 		ledsBlue(1);
 		ledsRed(1);
 	}

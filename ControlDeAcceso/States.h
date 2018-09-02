@@ -9,5 +9,6 @@ extern State InPassword;
 extern State Idle;
 extern State Open;
 extern State Admin;
+
 #endif // !STATES_H
 
