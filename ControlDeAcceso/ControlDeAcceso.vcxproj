@@ -127,6 +127,7 @@
     <ClCompile Include="Display.c" />
     <ClCompile Include="EventGenerator.c" />
     <ClCompile Include="FSM.c" />
+    <ClCompile Include="Game.c" />
     <ClCompile Include="gpio.c" />
     <ClCompile Include="Idle.c" />
     <ClCompile Include="InID.c" />
@@ -149,6 +150,7 @@
     <ClInclude Include="FSM.h" />
     <ClInclude Include="AppData.h" />
     <ClInclude Include="Display.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="gpio.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Leds.h" />
