@@ -3,15 +3,17 @@
 #include "Display.h"
 #include "Keyboard.h"
 #include "Clock.h"
+#include "Leds.h"
 #include <stdlib.h>
 #include <stdint.h>
 void gameRun(void)
 {
 	uint8_t game[4][3] = { { 0,0,0 },{ 0,0,0 },{ 0,0,0 },{ 0,1,0 } };
-	int lives = 1,pos=1;
+	int lives = 1,pos=1,led=0;
 	double diff = 1000;
 	unsigned long long t = 0;
 	clock_t adv=getTime(),show=getTime();
+	ledsOff();
 	srand(getTime());
 	while (lives)
 	{
@@ -58,6 +60,9 @@ void gameRun(void)
 				}
 
 			}
+			ledsBlue(led);
+			ledsBoard(led);
+			led^=1;
 			t++;
 			adv=getTime();
 		}
@@ -82,11 +87,14 @@ void gameRun(void)
 			}
 		}
 	}
+	ledsOff();
+	ledsRed(1);
 	print('L',3);
 	print('O',2);
 	print('S',1);
 	print('S',0);
 	while(readKb()!='#');
+	ledsOff();
 	print('0'+t/1000,3);
 	print('0'+(t/100)%10,2);
 	print('0'+(t/10)%10,1);

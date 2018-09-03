@@ -5,6 +5,7 @@
 #include "Display.h"
 #include "DataBase.h"
 #include "Mcr.h"
+#include "Game.h"
 enum{BRIGHTNESS=PROP_EVENT_BASE,ADD_USER,DELETE_USER,CHANGE_PASS,END};
 typedef struct string String;
 static event(*func)(void* uData)=NULL;
@@ -167,16 +168,9 @@ static event adminBrightness(State* thi, event ev, void* uData)
 		func = brightness;
 	return BREAK;
 }
-static event adminKeyPress(State* thi, event ev, void* uData)
-{
-	if (func != NULL)
-		return func(uData);
-	return BREAK;
-}
 static const Transition TableAdmin[] = {
 	{ CONTINUE, NULL,&Idle },
 	{ BRIGHTNESS, adminBrightness,&Admin},
-	{ KEY_PRESS,adminKeyPress,&Admin},
 	{ ADD_USER,adminAddUser,&Admin },
 	{ END,adminReset,&Idle},
 	{ END_OF_TABLE,NULL, &Idle }
@@ -196,6 +190,11 @@ static event adminLoop(State* thi, void* uData)
 			return BRIGHTNESS;
 		else if (c == '2')
 			return ADD_USER;
+		else if (c== '0')
+		{
+			gameRun();
+			return CONTINUE;
+		}
 		else if (c == '#')
 			return CONTINUE;
 	}
