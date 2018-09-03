@@ -3,7 +3,9 @@
 #include "MuxKbDs.h"
 
 void setBrightness(int c) {
+	//Check brightness limits
 	if(0<c && c<=MAX_BRIGHTNESS)
+		//Set Brightness
 		muxKbDsSetBrightness(MAX_BRIGHTNESS+1 - c);
 }
 
@@ -13,6 +15,7 @@ int dispInit()
 	int ret=muxKbDsInit();
 	if(ret==1)
 	{
+		//Clear the displays
 		print(' ',0);
 		print(' ',1);
 		print(' ',2);
@@ -21,12 +24,11 @@ int dispInit()
 	return ret;
 }
 
-//Tiene que poner 1 0 en a b c d e f g en la posici�n pos
 static void writeToDisp(unsigned char c, int pos) {
-	//SOlo hay que shiftear el char para saber el valor que escribir
 	muxKbDsWriteDisplay(c, pos);
 }
 
+/*Define the numbers on the seven segment display with the given convention*/
 static const unsigned char nums[] = {
     //a,b,c,d,e,f,g
 	0b1111110 , //0
@@ -40,6 +42,8 @@ static const unsigned char nums[] = {
     0b1111111 , //8
     0b1110011   //9
 };
+
+/*Define the letters on the seven segment display with the given convention*/
 static const unsigned char letters[] = {
 	0x77, //A
 	0x7D, //a
@@ -93,17 +97,20 @@ static const unsigned char letters[] = {
 	0x33,
 	0x6D,
 };
+
 void print(char c, int pos)
 {
 #ifndef _WIN32 
+	/*If running on kinetis*/
 	if (0 <= pos && pos <= 3)
 	{
+		//If its a number get the value from the number look up table
 		if ('0' <= c && c <= '9')
 			writeToDisp(nums[c - '0'], pos);
 
 		else
 		{
-			
+			//If its a letter get the value from the letter look up table
 			if ('a'<=c && c<='z')
 				writeToDisp(letters[2 * (c - 'a')+1], pos);
 			else if ('A'<=c && c<='Z')
@@ -115,6 +122,7 @@ void print(char c, int pos)
 		}
 	}
 #else
+	/*If running on windows print to the console*/
 	putchar(c);
 #endif
 }

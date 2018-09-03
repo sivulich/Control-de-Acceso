@@ -8,14 +8,18 @@ void App_Run (void);
 int main (void)
 {
 #ifndef _WIN32 
+	/*Hardware init*/
 	hw_Init();
+	/*Disable interrupts to ensure a correct app initialization*/
 	hw_DisableInterrupts();
 #endif
-	App_Init(); /* Program-specific setup */
+	/*Init all the modules necessary for the app to run*/
+	App_Init();
 #ifndef _WIN32 
+	/*Enable interrupts*/
 	hw_EnableInterrupts();
 #endif
-	
-	App_Run(); /* Program-specific loop  */
+	/*Run the aplication*/
+	App_Run();
 	return 0;
 }
