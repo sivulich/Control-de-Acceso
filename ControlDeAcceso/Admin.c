@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdlib.h>
 #include <string.h>
 #include "States.h"
@@ -6,10 +7,11 @@
 #include "DataBase.h"
 #include "Mcr.h"
 #include "Game.h"
+
 enum{BRIGHTNESS=PROP_EVENT_BASE,ADD_USER,DELETE_USER,CHANGE_PASS,END};
 typedef struct string String;
 static event(*func)(void* uData)=NULL;
-static event addUser(void* uData)
+static event modifyDataBase(void* uData)
 {
 	AppData* data=(AppData*)uData;
 	switch (data->auData.state)
@@ -61,7 +63,13 @@ static event addUser(void* uData)
 				char c = readKb();
 				if(c=='#' || data->auData.newIDlen>=MAX_ID_LEN)
 					if (data->auData.newIDlen > 0)
-						data->auData.state = 5;
+					{
+						if (data->auData.mode == 0 || data->auData.mode == 2) //AddUser or ChangePass
+							data->auData.state = 5;
+						else if (data->auData.mode == 1)  //DeleteUser
+							data->auData.state = 7;
+
+					}
 					else
 					{
 						data->auData.state = 0;
@@ -88,7 +96,10 @@ static event addUser(void* uData)
 		case 4:
 			getLastCard(data->auData.newID);
 			data->auData.newIDlen = strlen(data->auData.newID);
-			data->auData.state = 5;
+			if (data->auData.mode == 0 || data->auData.mode == 2) //AddUser or ChangePass
+				data->auData.state = 5;
+			else if (data->auData.mode == 1)  //DeleteUser
+				data->auData.state = 7;
 			break;
 		case 5:
 			if (kbHit())
@@ -96,7 +107,14 @@ static event addUser(void* uData)
 				char c = readKb();
 				if (c == '#' || data->auData.newPassLen >= MAX_ID_LEN)
 					if (data->auData.newPassLen > 0)
-						data->auData.state = 6;
+					{
+						if (data->auData.mode == 0)		  //AddUser
+							data->auData.state = 6;
+						else if (data->auData.mode == 1)  //DeleteUser
+							data->auData.state = 7;
+						else if (data->auData.mode == 2)  //ChangePass
+							data->auData.state = 8;
+					}
 					else
 					{
 						data->auData.state = 0;
@@ -119,7 +137,7 @@ static event addUser(void* uData)
 					data->auData.newPass[data->auData.newPassLen++] = c;
 			}
 			break;
-		case 6:
+		case 6:		//AddUser
 			if (data->auData.newIDlen > 0)
 			{
 				unsigned i = 0;
@@ -134,13 +152,44 @@ static event addUser(void* uData)
 			}
 			data->auData.state = 0;
 			return END;
+			break;
+		case 7:		//DeleteUser
+			if (data->auData.newIDlen > 0)
+			{
+				unsigned i = 0, j = 0;
+				encrypt(data->auData.newID);
+				while (i < MAX_USERS && keys[i][0][0] != 0 && strcmp(keys[i][0], data->auData.newID)) i++;	//Look the pos of the given ID
+				while (j < MAX_USERS && keys[j][0][0] != 0) j++;	//Look for the final pos
+				if (!strcmp(keys[i][0], data->auData.newID) && i<MAX_USERS && keys[j][0][0] == 0)
+				{
+					//Copy the last user on the pos of the user to delete
+					strcpy(keys[i][0], keys[j - 1][0]);
+					strcpy(keys[i][1], keys[j - 1][1]);
+					//Delete the last user info as its now in the pos i
+					char *del = "";
+					strcpy(keys[j - 1][0], del);
+					strcpy(keys[j - 1][1], del);
+				}
+			}
+			data->auData.state = 0;
+			return END;
+			break;
+		case 8:		//ChangePass
+			if (data->auData.newIDlen > 0)
+			{
+				unsigned i = 0;
+				encrypt(data->auData.newID);
+				while (i < MAX_USERS && keys[i][0][0] != 0 && strcmp(keys[i][0], data->auData.newID)) i++;	//Look the pos of the given ID
+				if (!strcmp(keys[i][0], data->auData.newID) && i<MAX_USERS)
+				{
+					//Change the pass of the given ID
+					encrypt(data->auData.newPass);
+					strcpy(keys[i][1], data->auData.newPass);
+				}
+			}
+			data->auData.state = 0;
+			return END;
 	}
-	return BREAK;
-}
-static event adminAddUser(State* thi, event ev, void* uData)
-{
-	if (func == NULL)
-		func = addUser;
 	return BREAK;
 }
 
@@ -157,6 +206,13 @@ static event brightness(void* uData)
 	return BREAK;
 
 }
+
+static event adminModifyDataBase(State* thi, event ev, void* uData)
+{
+	if (func == NULL)
+		func = modifyDataBase;
+	return BREAK;
+}
 static event adminReset(State* thi, event ev, void* uData)
 {
 	func = NULL;
@@ -168,10 +224,13 @@ static event adminBrightness(State* thi, event ev, void* uData)
 		func = brightness;
 	return BREAK;
 }
+
 static const Transition TableAdmin[] = {
 	{ CONTINUE, NULL,&Idle },
 	{ BRIGHTNESS, adminBrightness,&Admin},
-	{ ADD_USER,adminAddUser,&Admin },
+	{ ADD_USER,adminModifyDataBase,&Admin },
+	{ DELETE_USER,adminModifyDataBase,&Admin },
+	{ CHANGE_PASS,adminModifyDataBase,&Admin },
 	{ END,adminReset,&Idle},
 	{ END_OF_TABLE,NULL, &Idle }
 };
@@ -189,7 +248,20 @@ static event adminLoop(State* thi, void* uData)
 		if (c == '1')
 			return BRIGHTNESS;
 		else if (c == '2')
+		{
+			data->auData.mode = 0;
 			return ADD_USER;
+		}
+		else if (c == '3')
+		{
+			data->auData.mode = 1;
+			return DELETE_USER;
+		}
+		else if (c == '4')
+		{
+			data->auData.mode = 2;
+			return CHANGE_PASS;
+		}
 		else if (c== '0')
 		{
 			gameRun();

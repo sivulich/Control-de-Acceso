@@ -92,7 +92,7 @@ void gameRun(void)
 	print('L',3);
 	print('O',2);
 	print('S',1);
-	print('S',0);
+	print('E',0);
 	while(readKb()!='#');
 	ledsOff();
 	print('0'+t/1000,3);
