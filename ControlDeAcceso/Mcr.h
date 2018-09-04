@@ -22,4 +22,6 @@ int hasCardValue();
 
 void getLastCard(char* dest);
 
+void mcrFlush(void);
+
 #endif

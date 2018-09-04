@@ -52,10 +52,14 @@ static event modifyDataBase(void* uData)
 			if (hasCardValue())
 			{
 				data->auData.state = 4;
-				break;
+				return CARD_SWIPE;
 			}
 			else if (kbHit())
+			{
 				data->auData.state = 3;
+				return KEY_PRESS;
+			}
+				
 
 		case 3:
 			if (kbHit())

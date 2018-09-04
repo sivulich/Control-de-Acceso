@@ -46,6 +46,10 @@ uint8_t cardNumbersStored,SSFound,finishedReadingCard,dataOverflow,digitsRecieve
  ***************************
  **************************/
 static int init = 0;
+void mcrFlush(void)
+{
+	cardNumbersStored = 0;
+}
 int mcrInit(void)
 {
 	if (init == 0)

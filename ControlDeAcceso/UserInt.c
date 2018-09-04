@@ -5,12 +5,13 @@
 #ifdef _WIN32
 #include <stdio.h>
 #endif
-
+/*User interface satitc vars*/
 static clock_t timer = 0,ledTimer=0;
 static State* lastState=0;
 
 int uiInit()
 {
+	/*Init User interface*/
 	if(clockInit()==1)
 		if(dispInit()==1)
 			if(ledsInit()==1)
@@ -20,6 +21,7 @@ int uiInit()
 }
 void uiLoop(State* curr, event ev, AppData* data) {
 #ifndef _WIN32 
+	/*If running on kintetis use seven segment displays and leds*/
 	if(curr !=&Open && ledTimer!=0)
 		ledTimer = 0;
 	if (curr == &Open)
@@ -168,6 +170,7 @@ void uiLoop(State* curr, event ev, AppData* data) {
 		timer = 0;
 	}
 #else
+	/*If running on windows use console*/
 	if (timer == 0)
 		timer = getTime();
 	if ((double)(getTime() - timer) / CLOCKS_PER_SEC > 0.1)

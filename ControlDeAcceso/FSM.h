@@ -33,7 +33,7 @@ struct Transition {
 	//Next state
 	State* next;
 };
-//Main loop of a state, to be called if NO_EVENT ocurs o no specific event handler is defined
+//Main loop of the FSM
 State* mainLoop(event ev, State* curr, void* uData);
 #endif // !FSM_H
 

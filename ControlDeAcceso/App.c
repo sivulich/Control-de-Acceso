@@ -51,13 +51,14 @@ void App_Run (void)
 	for (int i = 0; ; i++)
 	{
 		ev = getEvent();
-		if (ev == KEY_PRESS)
+		if (ev == KEY_PRESS || ev==CARD_SWIPE)
 			del = 1;
 		curr = mainLoop((event)ev, curr, (void* )&data);
 		if (del == 1)
 		{
 			del = 0;
 			kbFlush();
+			mcrFlush();
 		}
 		if (((double)getTime() - c) / CLOCKS_PER_SEC > 0.2)
 		{
